@@ -1,0 +1,12 @@
+#!/bin/bash
+key=$1
+if [[ $# -eq 0 ]]
+then
+	echo "Arguments not given. Usage: ./checkcert.sh PRIVKEY.key"
+else
+	checkkey=$(openssl rsa -check -in "$key")
+	if [[ "$checkkey" =~ "RSA key ok" ]]
+	then
+		echo "PRIVKEY is not encryption"
+	fi
+fi

@@ -1,0 +1,13 @@
+#!/bin/bash
+key=$1
+decryptkey=$2
+if [[ $# -lt 2 ]]
+then
+	echo "Arguments not given. Usage: ./checkcert.sh PRIVKEY.key Decryptkey.key"
+else
+	decryptkey=$(openssl rsa -in "$key" -out "$decryptkey")
+	if [[ "$decryptkey" =~ "writing RSA key" ]]
+	then
+		echo "PRIVKEY is decryption at $pwd"
+	fi
+fi
